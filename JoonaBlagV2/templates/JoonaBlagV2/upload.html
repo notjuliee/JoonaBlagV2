@@ -1,0 +1,23 @@
+{% load static %}
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title> Upload | JoonaBlagV2 </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+</head>
+
+<body>
+    <div class="app-container">
+        <form action="{% url 'upload' %}" method="post">
+            <input type="text" name="title" placeholder="Title" class="input" />
+            <br/>
+            <textarea name="content" placeholder="Content" class="input"></textarea>
+            <br/> {% csrf_token %}
+            <input type="submit" value="Post it :D" class="input" />
+        </form>
+    </div>
+</body>
+
+</html>

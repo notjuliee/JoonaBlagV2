@@ -1,0 +1,5 @@
+secret
+.vscode/
+JoonaBlagV2/__pycache__/
+uploads/
+db.sqlite3

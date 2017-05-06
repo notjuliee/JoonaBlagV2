@@ -1,0 +1,23 @@
+{% load static %}
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title> {{ post.title }} | JoonaBlagV2 </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+</head>
+
+<body>
+    <div class="app-container post-info">
+        <h1 class="post-title">{{ post.title }}</h1>
+        <p class="post-meta">By {{ post.author }} on {{ post.date }}</p>
+    </div>
+    <div class="app-container post-content">
+        {% autoescape off %}
+        {{ post.html }}
+        {% endautoescape %}
+    </div>
+</body>
+
+</html>
