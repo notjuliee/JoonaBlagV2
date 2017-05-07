@@ -33,12 +33,30 @@ body {
 
 .app-container {
     text-align: center;
-    width: 025%;
+    width: 75%;
+    max-width: 1000px;
     margin: auto;
+    margin-bottom: 15px;
 }
 
 textarea {
     resize: none;
     width: 90%;
     height: 50%;
+}
+
+img {
+    width: 50%;
+}
+
+.comment-box {
+    height: 10%;
+}
+
+.comment, .comment-text {
+    background-color: #000000;
+    color: #00FF00;
+    border: 1px solid #00FF00;
+    border-radius: 5px;
+    margin: 5px;
 }

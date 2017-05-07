@@ -14,9 +14,28 @@
         <p class="post-meta">By {{ post.author }} on {{ post.date }}</p>
     </div>
     <div class="app-container post-content">
-        {% autoescape off %}
-        {{ post.html }}
-        {% endautoescape %}
+        {% autoescape off %} {{ post.html }} {% endautoescape %}
+    </div>
+    <div class="app-container comments">
+        <h1>Comments:</h1>
+        {% if comments %} {% for comment in comments %}
+        <div class="comment">
+            <p>By {{ comment.author }} on {{ comment.date }}</p>
+            <div class="comment-text">
+                <p>{{ comment.content }}</p>
+            </div>
+        </div>
+        {% endfor %} {% else %}
+        <div class="comment">
+            <p> No comments found. Add one?
+        </div>
+        {% endif %}
+        <form action="{% url 'comment' post.pk %}" method="post">
+            <textarea name="comment" placeholder="Content" class="comment-box input"></textarea>
+            <br/>
+            {% csrf_token %}
+            <input type="submit" value="Add comment!" class="input" />
+        </form>
     </div>
 </body>
 

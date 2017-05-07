@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title> Login | JoonaBlagV2 </title>
+    <title> Register | JoonaBlagV2 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="{% static 'css/app.css' %}">
 </head>
@@ -13,16 +13,15 @@
     <h3>Invalid username/password!</h3>
     {% endif %}
     <div class="app-container">
-        <form action="{% url 'login' %}{% if next %}?next={{ next }}{% endif %}" method="post">
+        <form action="{% url 'register' %}{% if next %}?next={{ next }}{% endif %}" method="post">
+            <input type="email" name="email" placeholder="Email Address" class="input" required="true" />
+            <br/>
             <input type="text" name="username" placeholder="Username" class="input" required="true" />
+            <br/>
             <input type="password" name="password" placeholder="Password" class="input" required="true" />
             <br/> {% csrf_token %}
-            <input type="submit" value="Login" class="input" />
+            <input type="submit" value="Register" class="input" />
         </form>
-        <p>
-            Don't have an account?
-            <a href="{% url 'register' %}{% if next %}?next={{ next }}{% endif %}">Register one!</a>
-        </p>
     </div>
 </body>
 

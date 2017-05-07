@@ -1,11 +1,14 @@
 from django.db import models
 from markdown import markdown
 
+
 class PostManager(models.Manager):
     def create_post(self, title, author, content, owner):
-        post = self.create(title=title, author=author, content=content, owner=owner)
+        post = self.create(
+            title=title, author=author, content=content, owner=owner)
         post.html = markdown(content)
         return post
+
 
 class Post(models.Model):
     title = models.CharField(max_length=256)
@@ -22,7 +25,9 @@ class Post(models.Model):
     objects = PostManager()
 
     class Meta:
-        permissions = (("can_post", "Can post"),("can_vote_posts", "Can vote on posts"),)
+        permissions = (("can_post", "Can post"), ("can_vote_posts",
+                                                  "Can vote on posts"), )
+
 
 class Comment(models.Model):
     author = models.CharField(max_length=128)
@@ -33,10 +38,12 @@ class Comment(models.Model):
     post = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.pk
+        return str(self.pk)
 
     class Meta:
-        permissions = (("can_comment", "Can comment"),("can_vote_comments", "Can vote on comments"),)
+        permissions = (("can_comment", "Can comment"),
+                       ("can_vote_comments", "Can vote on comments"), )
+
 
 class File(models.Model):
     author = models.CharField(max_length=128)
@@ -49,4 +56,4 @@ class File(models.Model):
         return self.filename
 
     class Meta:
-        permissions = (("can_upload", "Can upload files"),)
+        permissions = (("can_upload", "Can upload files"), )
