@@ -4,7 +4,7 @@ from .models import Post, File, Comment
 from .utils import gen_filename
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Permission
 from django.contrib.auth.decorators import login_required, permission_required
 
 
@@ -65,7 +65,9 @@ def do_register(request):
         return HttpResponseRedirect(reverse('index'))
     if request.POST:
         user = User.objects.create_user(request.POST['username'], request.POST['email'], request.POST['password'])
-        user.user_permissions.add(["JoonaBlagV2.can_comment","JoonaBlagV2.can_vote_posts","JoonaBlagV2.can_vote_comments"])
+        #user.user_permissions.add(Permission.objects.get(codename="can_comment"));
+        user.user_permissions.add(Permission.objects.get(codename="can_vote_posts"));
+        user.user_permissions.add(Permission.objects.get(codename="can_vote_comments"));
         user.save()
         login(request, user)
         return HttpResponseRedirect(request.GET.get('next', '/'))
