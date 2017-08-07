@@ -1,10 +1,5 @@
-import datetime
-import mimetypes
+from time import strftime
 
-def get_ext(mime):
-    if mime == "text/plain":
-        return ".txt"
-    return mimetypes.guess_extension(mime);
-
-def gen_filename(u, f):
-    return u+"-"+str(datetime.datetime.now().timestamp()).split(".")[0]+get_ext(f.content_type)
+def gen_dirname(instance, filename):
+    print(instance, filename)
+    return "uploads/{}/{}/{}".format(instance.author, strftime("%Y/%m/%d"), filename)

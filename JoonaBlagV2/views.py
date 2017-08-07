@@ -1,7 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden, HttpResponseNotAllowed
 from django.shortcuts import render, get_object_or_404
 from .models import Post, File, Comment
-from .utils import gen_filename
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.contrib.auth.models import User, Permission
@@ -82,7 +81,7 @@ def file_upload(request):
         p = File(
             author=request.user.username,
             owner=request.user.id,
-            filename=gen_filename(request.user.username, request.FILES['upload']),
+            filename=request.FILES['upload'].name,
             content=request.FILES['upload'],
             mime=request.FILES['upload'].content_type)
         p.save()

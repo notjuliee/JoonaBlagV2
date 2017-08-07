@@ -1,6 +1,6 @@
 from django.db import models
 from markdown import markdown
-
+from .utils import gen_dirname
 
 class PostManager(models.Manager):
     def create_post(self, title, author, content, owner):
@@ -49,7 +49,7 @@ class File(models.Model):
     author = models.CharField(max_length=128)
     owner = models.IntegerField(default=0)
     filename = models.CharField(max_length=128)
-    content = models.FileField(upload_to='uploads/%Y/%m/%d/')
+    content = models.FileField(upload_to=gen_dirname)
     mime = models.CharField(max_length=64)
 
     def __str__(self):
