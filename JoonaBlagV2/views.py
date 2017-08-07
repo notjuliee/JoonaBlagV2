@@ -82,19 +82,12 @@ def file_upload(request):
         p = File(
             author=request.user.username,
             owner=request.user.id,
-            filename=gen_filename(request.FILES['upload']),
+            filename=gen_filename(request.user.username, request.FILES['upload']),
             content=request.FILES['upload'],
             mime=request.FILES['upload'].content_type)
         p.save()
-        return HttpResponseRedirect(
-            reverse('file', args=[p.author, p.filename]))
+        return HttpResponseRedirect("/"+p.content.name)
     return render(request, "JoonaBlagV2/file.html")
-
-
-def get_file(request, username, filename):
-    req_file = get_object_or_404(File, author=username, filename=filename)
-    return HttpResponse(req_file.content, content_type=req_file.mime)
-
 
 @login_required
 @permission_required('JoonaBlagV2.can_comment', raise_exception=True)

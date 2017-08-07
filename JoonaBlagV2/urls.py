@@ -26,6 +26,5 @@ urlpatterns = [
     url(r'^accounts/login/$', views.do_login, name='login'),
     url(r'^accounts/logout/$', views.do_logout, name='logout'),
     url(r'^accounts/register/$', views.do_register, name='register'),
-    url(r'^file/(?P<username>.+)/(?P<filename>[0-9]+\..{1,10})', views.get_file, name='file'),
     url(r'^admin/', admin.site.urls),
 ]
